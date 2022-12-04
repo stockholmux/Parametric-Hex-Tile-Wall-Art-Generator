@@ -41,7 +41,6 @@ if (show_only == false) {
     tiles();
     artwork();
 } else {
-    echo("show only true");
     intersection() {
         translate([0,0,base_thickness])
             tiles();
