@@ -3,6 +3,8 @@ include <BOSL2/std.scad>
 /* [Artwork] */ 
 // SVG: filename & path
 svg_fname = "sample-poo.svg";
+// Scaling factor of SVG from 0-100, 100 = 100%, 90 = 90%, and so on
+scale_factor = 1;
 
 /* [Tile Specifications] */ 
 // hexagon side length in mm
@@ -26,10 +28,10 @@ onlyY = 0;
 // calculations
 apothem = sqrt( side_length^2 - (side_length/2)^2 );
 y_stacking = side_length * 1.5;
-x_stacking = apothem*2;
+x_stacking = apothem * 2;
 
 // debugging messages
-echo("TOTAL TILES: ", y_count * x_count);
+echo("TOTAL TILES:", y_count * x_count);
 if (show_only == true) {
     echo("Showing Only:",onlyX,onlyY);
 } else {
@@ -75,7 +77,8 @@ module tiles()
 module artwork()
     translate([0,0,base_thickness])
         linear_extrude(design_thickness)
-            import(svg_fname);
+            scale(scale_factor / 100)
+                import(svg_fname);
 
 module tile() 
     rotate([0,0,90]) {

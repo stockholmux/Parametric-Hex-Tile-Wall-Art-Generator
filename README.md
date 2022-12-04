@@ -59,6 +59,10 @@ However most people want something with more pop, you'll need to do a filament s
 
 If you have an IDEX printer, Pallet Pro, AMS or some other method of changing filament colours mid-print, do whatever you normally do to change colours you lucky dog.
 
+## Sample file
+
+Included in this repo is my black and white rendition of a poop emoji (`sampe-poo.svg`). The default settings will print each tile at 105mm per hexagon side so that about 1 metre across and 1 metre tall (huge)! Of course, this is parametric, change the artwork and size to suit your needs.
+
 ## FAQ
 
 1. **Why is this so slow to generate the STL files?!** SVG import and extrusion in OpenSCAD is a known slow operation. The resulting mesh of a small SVG file (a few kb) will explode into a very large 3D solid mesh (likely dozens of megabytes). Additionally, OpenSCAD is, at the time of writing, single threaded, only works on a single core of the CPU and doesn't take advantage of GPUs for this operation.
