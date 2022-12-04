@@ -2,7 +2,7 @@ include <BOSL2/std.scad>
 
 /* [Artwork] */ 
 // SVG: filename & path
-svg_fname = "sample-poo-3.svg";
+svg_fname = "sample-poo.svg";
 
 /* [Tile Specifications] */ 
 // hexagon side length in mm
