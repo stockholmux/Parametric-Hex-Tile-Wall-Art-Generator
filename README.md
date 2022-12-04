@@ -1,4 +1,4 @@
-# Parametric Hex Wall Art Generator
+# Parametric Hex Tile Wall Art Generator
 
 This OpenSCAD program will generate a tessellated set of hexagon "tiles" composited with the SVG artwork of your choosing for which you can generate 3D Printable STLs.
 
