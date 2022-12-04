@@ -16,9 +16,9 @@ for i in $( eval echo {0..$1} )
 do
    echo "Generating tile $i"
 
-   yq -o json -P ".parameterSets.atile.onlyX=\"$i\"" generate.json > $tempfname
+   yq -o json -P ".parameterSets.atile.onlyX=\"$i\", .parameterSets.atile.onlyY=\"$2\"" generate.json > $tempfname
 
    
-    /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD hex.scad -P atile -p $tempfname -o tile$i-$2.stl
+    /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD hex.scad -P atile -p $tempfname -o tile-row$2-$i.stl
 done
 rm $tempfname
