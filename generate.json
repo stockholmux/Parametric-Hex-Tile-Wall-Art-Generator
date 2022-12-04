@@ -1,0 +1,17 @@
+{
+    "parameterSets": {
+        "atile": {
+            "base_thickness": "3",
+            "border_thickness": "1",
+            "design_thickness": "1",
+            "onlyX": "1",
+            "onlyY": "1",
+            "show_only": "true",
+            "side_length": "105",
+            "svg_fname": "sample-poo.svg",
+            "x_count": "5",
+            "y_count": "6"
+        }
+    },
+    "fileFormatVersion": "1"
+}
