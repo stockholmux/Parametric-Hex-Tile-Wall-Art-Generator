@@ -4,7 +4,12 @@ include <BOSL2/std.scad>
 // SVG: filename & path
 svg_fname = "sample-poo.svg";
 // Scaling factor of SVG from 0-100, 100 = 100%, 90 = 90%, and so on
-scale_factor = 1;
+scale_factor = 100;
+
+// nudge the SVG in the X position
+svg_position_x = 0;
+// nudge the SVG in the Y position
+svg_position_y = 0;
 
 /* [Tile Specifications] */ 
 // hexagon side length in mm
@@ -75,7 +80,7 @@ module tiles()
                                 tile();
 
 module artwork()
-    translate([0,0,base_thickness])
+    translate([svg_position_x,svg_position_y,base_thickness])
         linear_extrude(design_thickness)
             scale(scale_factor / 100)
                 import(svg_fname);
