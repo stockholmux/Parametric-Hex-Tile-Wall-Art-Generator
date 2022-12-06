@@ -20,6 +20,8 @@ border_thickness = 1;
 base_thickness = 3;
 // Thickness of the design and border in mm
 design_thickness = 1;
+// Include coordinates embossed on the bottom of the tiles. If set to 0 no coordinate will be embossed.
+coordinate_depth = 0;
 
 /* [Tile Counts] */
 y_count = 6;
@@ -73,11 +75,11 @@ module tiles()
                         tile_id = [x_translation, y_translation]
                     ) 
                         if (show_only == false)
-                            tile();
+                            tile(coords=format_tileid(tile_id));
                         else if (
                             (onlyX == tile_id.x) && 
                             (onlyY == tile_id.y)) 
-                                tile();
+                                tile(coords=format_tileid(tile_id));
 
 module artwork()
     translate([svg_position_x,svg_position_y,base_thickness])
@@ -85,11 +87,19 @@ module artwork()
             scale(scale_factor / 100)
                 import(svg_fname);
 
-module tile() 
+module tile(coords="") 
     rotate([0,0,90]) {
         color("lightgrey") 
-            linear_extrude(base_thickness)
-                hexagon(side=side_length);
+            difference() {
+                linear_extrude(base_thickness)
+                    hexagon(side=side_length);
+                if (coordinate_depth > 0) 
+                    rotate([0,0,-90])
+                        translate([0,0,-epsilon()]) 
+                            linear_extrude(coordinate_depth)
+                                text(coords, halign="center", valign="center", size=side_length*0.5);
+            }
+
 
         translate([0,0,base_thickness])
             linear_extrude(design_thickness)
@@ -98,4 +108,6 @@ module tile()
                     hexagon(side=side_length-border_thickness);
                 }
     }
-        
+
+function epsilon(n=1) = n * 0.01;
+function format_tileid(tileid) = str(tileid.x, ", ", tileid.y);
