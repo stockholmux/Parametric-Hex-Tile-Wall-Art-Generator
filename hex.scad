@@ -52,14 +52,14 @@ if (show_only == false) {
 } else {
     intersection() {
         translate([0,0,base_thickness])
-            tiles();
+            tiles(blank_tiles = true);
         artwork();
     }
     tiles();
 }
 
 // modules
-module tiles() 
+module tiles(blank_tiles = false) 
     for(y_translation = [0:y_count]) 
         translate([
                 (y_translation % 2) * apothem,
@@ -75,11 +75,11 @@ module tiles()
                         tile_id = [x_translation, y_translation]
                     ) 
                         if (show_only == false)
-                            tile(coords=format_tileid(tile_id));
+                            tile(coords=format_tileid(tile_id), blank_tiles=blank_tiles);
                         else if (
                             (onlyX == tile_id.x) && 
                             (onlyY == tile_id.y)) 
-                                tile(coords=format_tileid(tile_id));
+                                tile(coords=format_tileid(tile_id), blank_tiles=blank_tiles);
 
 module artwork()
     translate([svg_position_x,svg_position_y,base_thickness])
@@ -87,13 +87,14 @@ module artwork()
             scale(scale_factor / 100)
                 import(svg_fname);
 
-module tile(coords="") 
+module tile(coords="", blank_tiles=false) 
     rotate([0,0,90]) {
         color("lightgrey") 
             difference() {
+                echo(coordinate_depth, blank_tiles);
                 linear_extrude(base_thickness)
                     hexagon(side=side_length);
-                if (coordinate_depth > 0) 
+                if ((coordinate_depth > 0) && (blank_tiles == false))
                     rotate([0,0,-90])
                         translate([0,0,-epsilon()]) 
                             linear_extrude(coordinate_depth)
