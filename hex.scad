@@ -91,7 +91,6 @@ module tile(coords="", blank_tiles=false)
     rotate([0,0,90]) {
         color("lightgrey") 
             difference() {
-                echo(coordinate_depth, blank_tiles);
                 linear_extrude(base_thickness)
                     hexagon(side=side_length);
                 if ((coordinate_depth > 0) && (blank_tiles == false))
